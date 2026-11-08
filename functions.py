@@ -18,6 +18,18 @@ def mass_of_cylinder(height,diameter,thickness,density):
     mass = volume * density
     return mass
 
+def volume_of_tapered_cylinder(height,top_diameter,bottom_diameter,thickness):
+    top_radius = top_diameter / 2
+    bottom_radius = bottom_diameter / 2
+    area = pi * ((top_radius + bottom_radius) * thickness - thickness ** 2)
+    volume = area * height
+    return volume
+
+def mass_of_tapered_cylinder(height,top_diameter,bottom_diameter,thickness,density):
+    volume = volume_of_tapered_cylinder(height,top_diameter,bottom_diameter,thickness)
+    mass = volume * density
+    return mass
+
 
 #functions for added mass due to interacting with the water
 #1030 is the density of sea water in kg/m^3

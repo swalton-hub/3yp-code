@@ -2,6 +2,8 @@
 #MT week 2 
 #Function for TLP
 import math
+import numpy as np
+
 
 pi = math.pi
 

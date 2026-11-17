@@ -9,7 +9,7 @@ g = 9.81
 
 real_thrust = 4000000
 
-turbine_radius = 230
+turbine_radius = 205
 tower_height_loop = turbine_radius + 30
 #thickness = 0.1    
 density_steel = 7850
@@ -83,14 +83,15 @@ best_R_upper = None
 best_R_lower = None
 best_t_upper = None
 best_t_lower = None
+loop = 0
 #looping through to find optimal tower diameters
 #for now we are assuming a linear taper from the bottom to the top 
 #of the tower
 #and we assume constant thickness of the tower wall
-for i in range (300,10000,10):
-    for j in range (i,20000,10):
-        for t1 in range (10,100,10):
-            for t2 in range (t1,100,10):
+for i in range (300,1000,100):
+    for j in range (i,2000,100):
+        for t1 in range (30,300,20):
+            for t2 in range (t1,300,20):
 
                 #convert thickness to m
                 t_upper_loop = t1/1000
@@ -121,6 +122,8 @@ for i in range (300,10000,10):
                 
                 total_stress = stress_axial + stress_moment
 
+                loop = loop + 1
+                print(loop)
                 if total_stress < yield_stress:
 
                     w_loop_square = w_func(R_upper_loop, R_lower_loop, t_upper_loop, t_lower_loop, tower_height_loop)
@@ -130,8 +133,8 @@ for i in range (300,10000,10):
                         if w > 3 * w_turbine:
 
                             #simple check for not super wide and thin for buckling
-                            if R_upper_loop / t_upper_loop <100:
-                                if R_lower_loop / t_lower_loop <100:
+                            if R_upper_loop / t_upper_loop < 50:
+                                if R_lower_loop / t_lower_loop < 50:
                                     best_R_upper = R_upper_loop
                                     best_R_lower = R_lower_loop
                                     best_t_upper = t_upper_loop
